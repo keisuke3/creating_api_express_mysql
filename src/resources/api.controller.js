@@ -1,7 +1,16 @@
+const Todo = require('../models/index').Todo;
+
 module.exports = {
 
-  getTodos(req, res) {
-    res.status(200).send('get todos from DB');
+  async getTodos(req, res) {
+    try {
+      const todos = await Todo.findAll({
+        order: [['title', 'ASC']]
+      });
+      res.status(200).json(todos);
+    } catch (error) {
+      res.json(error);
+    }
   },
   postTodo(req, res) {
     res.status(200).send('create todos to DB');
