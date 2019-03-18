@@ -5,7 +5,7 @@ module.exports = {
   async getTodos(req, res) {
     try {
       const todos = await Todo.findAll({
-        order: [['title', 'ASC']]
+        order: [['id', 'ASC']]
       });
       res.status(200).json(todos);
     } catch (error) {
