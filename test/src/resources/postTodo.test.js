@@ -29,13 +29,13 @@ describe('POST /api/todos', () => {
       statusCode: 200
     }).send(postData);
 
-    const createTodo = response.body;
-    assert.equal(typeof createTodo.id, 'number');
-    assert.equal(typeof createTodo.title, 'string');
-    assert.equal(typeof createTodo.body, 'string');
-    assert.equal(typeof createTodo.completed, 'boolean');
-    assert.equal(typeof createTodo.createdAt, 'string');
-    assert.equal(typeof createTodo.updatedAt, 'string');
+    const createdTodo = response.body;
+    assert.equal(typeof createdTodo.id, 'number');
+    assert.equal(createdTodo.title, postData.title);
+    assert.equal(createdTodo.body, postData.body);
+    assert.equal(createdTodo.completed, postData.completed);
+    assert.equal(typeof createdTodo.createdAt, 'string');
+    assert.equal(typeof createdTodo.updatedAt, 'string');
 
     const currentTodos = await getTodos();
     assert.equal(oldTodos.length + 1, currentTodos.length);
