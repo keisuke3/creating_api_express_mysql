@@ -39,7 +39,7 @@ module.exports = {
         throw new Error(`There is no todo corresponding to id ${req.body.id}`);
       }
 
-      todo.update({
+      await todo.update({
         title: req.body.title,
         body: req.body.body,
         completed: req.body.completed
