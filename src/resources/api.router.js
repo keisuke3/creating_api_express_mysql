@@ -8,7 +8,7 @@ router
   .post(controller.postTodo);
 router
   .route('/todos/:id')
-  .put(controller.putTodo)
+  .put(controller.updateTodo)
   .delete(controller.deleteTodo);
 
 module.exports = router;
