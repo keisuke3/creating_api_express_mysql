@@ -10,18 +10,13 @@ const getTodos = async () => {
     endPoint: '/api/todos',
     statusCode: 200
   });
-  return response;
+  return response.body;
 };
 
-const putData = {
-  title: 'test title',
-  body: 'test body',
-  completed: false
-};
 const VALID_ID = 1;
 const INVALID_ID = 9999;
 
-describe('PUT /api/todo/:id', () => {
+describe('DELETE /api/todos/:id', () => {
   before(async () => {
     const dataList = [];
     for (let i = 0; i < 5; i++) {
@@ -35,34 +30,35 @@ describe('PUT /api/todo/:id', () => {
     await sequelize.truncate();
   });
 
-  it('更新したデータの確認', async () => {
+  it('削除したデータの確認', async () => {
     const oldTodos = await getTodos();
-
     const response = await requestHelper.request({
-      method: 'put',
+      method: 'delete',
       endPoint: `/api/todos/${VALID_ID}`,
       statusCode: 200
-    }).send(putData);
-    const updatedTodo = response.body;
-    assert.equal(typeof updatedTodo.id, 'number');
-    assert.equal(updatedTodo.title, putData.title);
-    assert.equal(updatedTodo.body, putData.body);
-    assert.equal(updatedTodo.completed, putData.completed);
-    assert.equal(typeof updatedTodo.createdAt, 'string');
-    assert.equal(typeof updatedTodo.updatedAt, 'string');
+    });
+    const deletedTodo = response.body;
+    assert.equal(deletedTodo.id, VALID_ID);
+    assert.equal(typeof deletedTodo.title, 'string');
+    assert.equal(typeof deletedTodo.body, 'string');
+    assert.equal(typeof deletedTodo.completed, 'boolean');
+    assert.equal(typeof deletedTodo.createdAt, 'string');
+    assert.equal(typeof deletedTodo.updatedAt, 'string');
 
     const currentTodos = await getTodos();
-    assert.notDeepEqual(oldTodos, currentTodos, '更新前後でデータは一致しない');
+    assert.equal(oldTodos.length, currentTodos.length + 1, '削除後はデータが1件減っているはず');
+    assert.deepEqual(oldTodos[0], deletedTodo, '削除前の1件目のデータは削除したデータと同じはず');
+    assert.notDeepEqual(currentTodos[0], deletedTodo, '削除後は1件目のデータが変わっているはず');
   });
 });
 
-describe('PUT /api/todos', () => {
-  it('存在しないidの場合エラーになる', async () => {
+describe('DELETE /api/todos/:id', () => {
+  it('存在しないidの場合はエラーになる', async () => {
     const response = await requestHelper.request({
-      method: 'put',
+      method: 'delete',
       endPoint: `/api/todos/${INVALID_ID}`,
       statusCode: 404
-    }).send(putData);
+    });
     assert.equal(response.body.error, `There is no todo corresponding to id ${response.body.id}`);
   });
 });
