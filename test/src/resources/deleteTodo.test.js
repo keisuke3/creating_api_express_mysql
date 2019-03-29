@@ -18,12 +18,12 @@ const INVALID_ID = 9999;
 
 describe('DELETE /api/todos/:id', () => {
   before(async () => {
-    const testDatas = [];
+    const dataList = [];
     for (let i = 0; i < 5; i++) {
       const testData = index.Todo.create(new CreateTodo());
-      testDatas.push(testData);
+      dataList.push(testData);
     }
-    await Promise.all(testDatas);
+    await Promise.all(dataList);
   });
 
   after(async () => {
