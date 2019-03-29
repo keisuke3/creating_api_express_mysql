@@ -51,9 +51,22 @@ module.exports = {
       res.status(404).json({ error: error.message });
     }
   },
-  deleteTodo(req, res) {
+  async deleteTodo(req, res) {
+    const transaction = await index.sequelize.transaction();
     const id = req.params.id;
-    const data = 'delete todo of id:' + id + 'from DB';
-    res.status(200).send(data);
+    try {
+      const todo = await index.Todo.findById(Number(id), { transaction });
+
+      if (!todo) {
+        throw new Error(`There is no todo corresponding to id ${req.body.id}`);
+      }
+
+      await todo.destroy({ transaction });
+      transaction.commit();
+      res.status(200).json(todo);
+    } catch (error) {
+      await transaction.rollback();
+      res.status(404).json({error: error.message});
+    }
   }
 };
