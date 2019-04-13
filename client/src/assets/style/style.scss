@@ -1,0 +1,55 @@
+@charset 'utf-8';
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body,
+ul,ol,li,
+h1,h2,h3,h4,h5,h6,
+p,
+section,article,
+header,footer,
+nav,form,input,div{
+	margin: 0;
+  padding: 0;
+  letter-spacing: 1px;
+}
+
+body {
+  background: #FFFFFF;
+  color: #333;
+}
+html {
+  font-size: 62.5%;
+}
+
+article,
+aside,
+footer,
+header,
+nav,
+section,
+main {
+	display: block;
+}
+
+ul,ol {
+  list-style: none;
+}
+
+img {
+  border: none;
+  height: auto;
+  max-width: 100%;
+  vertical-align: top;
+}
+h2{
+  font-size: 2.8rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color:#333333;
+}
