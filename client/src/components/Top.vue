@@ -1,32 +1,41 @@
 <template>
-  
+  <div class="todo-wrapper">
+    <p>Todoリスト</p>
+    <ul>
+      <li v-for="item in todos" v-bind:key="item.id">タイトル:{{ item.title }} コメント:{{ item.body }}</li>
+    </ul>
+  </div>
 </template>
 
 <script>
+import { mapState, mapActions, mapGetters } from "vuex";
 export default {
-  name: 'Top',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+  name: "Top",
+  computed: mapGetters({
+    todos: "addTodos"
+  }),
+  methods: {
+    ...mapActions({
+      getTodo: "fetchTodos"
+    })
+  },
+  created() {
+    this.getTodo();
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+<style lang="scss" scoped>
+.todo-wrapper {
+  p {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  ul {
+    li {
+      font-size: 1.5rem;
+    }
+  }
 }
 </style>
