@@ -6,12 +6,14 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+const API_URL ='http://localhost:3000/api/todos'
+
 const store = new Vuex.Store({
   state: {
     todos: []
   },
   getters: {
-    addTodos(state) {
+    todos(state) {
       return state.todos
     }
   },
@@ -22,7 +24,7 @@ const store = new Vuex.Store({
   },
   actions: {
     fetchTodos({ commit }) {
-      axios.get('http://localhost:3000/api/todos').then((res) => {
+      axios.get(API_URL).then((res) => {
         const todoData = res.data;
         commit('getTodos', todoData)
       })

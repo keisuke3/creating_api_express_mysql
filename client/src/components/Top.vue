@@ -8,19 +8,19 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Top",
   computed: mapGetters({
-    todos: "addTodos"
+    todos: "todos"
   }),
   methods: {
     ...mapActions({
-      getTodo: "fetchTodos"
+      fetchTodos: "fetchTodos"
     })
   },
   created() {
-    this.getTodo();
+    this.fetchTodos();
   }
 };
 </script>
