@@ -6,7 +6,7 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-const API_URL ='http://localhost:3000/api/todos'
+const API_URL = 'http://localhost:3000/api/todos'
 
 const store = new Vuex.Store({
   state: {

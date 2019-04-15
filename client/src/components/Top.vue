@@ -11,13 +11,13 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Top",
-  computed: mapGetters({
-    todos: "todos"
-  }),
+  computed: mapGetters([
+    "todos"
+  ]),
   methods: {
-    ...mapActions({
-      fetchTodos: "fetchTodos"
-    })
+    ...mapActions([
+      "fetchTodos"
+    ])
   },
   created() {
     this.fetchTodos();
