@@ -1,8 +1,8 @@
 <template>
   <div>
     <p v-if="errorFlag" class="error-msg">{{ errorMsg }}</p>
-    <input placeholder="タイトル" class="new-title" v-model="newTitle" new-title>
-    <textarea placeholder="コメント" class="new-body" v-model="newBody" cols="30" rows="2" new-body></textarea>
+    <input placeholder="タイトル" class="new-title" v-model="newTitle">
+    <textarea placeholder="コメント" class="new-body" v-model="newBody" cols="30" rows="2"></textarea>
     <button v-on:click="postTodoButton" class="add-button">追加</button>
   </div>
 </template>
