@@ -16,7 +16,7 @@ export default {
       newTitle: '',
       newBody: '',
       errorFlag: false,
-      errorMsg: '入力は必須です'
+      errorMsg: ''
     }
   },
   methods: {
@@ -24,8 +24,15 @@ export default {
       'postTodo'
     ]),
     postTodoButton() {
-      if (this.newTitle === '' || this.newBody === '') {
+      if (this.newTitle === '' && this.newBody === '') {
         this.errorFlag = true
+        this.errorMsg = 'タイトル・コメントは入力必須です'
+      } else if (this.newTitle === '') {
+        this.errorFlag = true
+        this.errorMsg = 'タイトルは入力必須です'
+      } else if (this.newBody === '') {
+        this.errorFlag = true
+        this.errorMsg = 'コメントは入力必須です'
       } else {
         this.postTodo({newTitle: this.newTitle, newBody: this.newBody})
         this.newTitle = ''
