@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">14.29% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>1/7</span>
+        <span class='fraction'>8/8</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>4/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">50% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>1/2</span>
+        <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">14.29% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>1/7</span>
+        <span class='fraction'>8/8</span>
       </div>
     </div>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -82,10 +82,12 @@
 37
 38
 39
-40</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+40
+41
+42
+43
+44
+45</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -99,17 +101,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -123,32 +133,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
   &lt;div&gt;
-    &lt;p v-if="errorFlag"&gt;入力は必須です&lt;/p&gt;
-    &lt;input placeholder="タイトル" class="new-title" v-model="newTitle"&gt;
-    &lt;textarea placeholder="コメント" class="new-body" v-model="newBody" cols="30" rows="2"&gt;&lt;/textarea&gt;
-    &lt;button v-on:click="postTodo" class="add-button"&gt;追加&lt;/button&gt;
+    &lt;p v-if="errorFlag" class="error-msg"&gt;{{ errorMsg }}&lt;/p&gt;
+    &lt;input placeholder="タイトル" class="new-title" v-model="newTitle" new-title&gt;
+    &lt;textarea placeholder="コメント" class="new-body" v-model="newBody" cols="30" rows="2" new-body&gt;&lt;/textarea&gt;
+    &lt;button v-on:click="postTodoButton" class="add-button"&gt;追加&lt;/button&gt;
   &lt;/div&gt;
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
+import { mapActions } from 'vuex'
 export default {
   name: 'Textarea',
   data() {
     return {
       newTitle: '',
       newBody: '',
-      errorFlag: false
+      errorFlag: false,
+      errorMsg: '入力は必須です'
     }
   },
   methods: {
-<span class="fstat-no" title="function not covered" >    postTodo() {</span>
-<span class="cstat-no" title="statement not covered" >      if (this.newTitle === '' || this.newBody === '') {</span>
-<span class="cstat-no" title="statement not covered" >        this.errorFlag = true</span>
+    ...mapActions([
+      'postTodo'
+    ]),
+    postTodoButton() {
+      if (this.newTitle === '' || this.newBody === '') {
+        this.errorFlag = true
       } else {
-<span class="cstat-no" title="statement not covered" >        this.$store.dispatch('postTodo', {newTitle: this.newTitle, newBody: this.newBody})</span>
-<span class="cstat-no" title="statement not covered" >        this.newTitle = ''</span>
-<span class="cstat-no" title="statement not covered" >        this.newBody = ''</span>
-<span class="cstat-no" title="statement not covered" >        this.errorFlag = false</span>
+        this.postTodo({newTitle: this.newTitle, newBody: this.newBody})
+        this.newTitle = ''
+        this.newBody = ''
+        this.errorFlag = false
       }
     }
   }
@@ -166,7 +181,7 @@ p {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Apr 21 2019 17:37:11 GMT+0900 (GMT+09:00)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Apr 25 2019 00:25:30 GMT+0900 (GMT+09:00)
 </div>
 </div>
 <script src="../../prettify.js"></script>
