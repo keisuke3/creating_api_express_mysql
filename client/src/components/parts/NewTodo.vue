@@ -24,13 +24,13 @@ export default {
       'postTodo'
     ]),
     postTodoButton() {
-      if (this.newTitle === '' && this.newBody === '') {
+      if (!this.newTitle && !this.newBody) {
         this.errorFlag = true
         this.errorMsg = 'タイトル・コメントは入力必須です'
-      } else if (this.newTitle === '') {
+      } else if (!this.newTitle) {
         this.errorFlag = true
         this.errorMsg = 'タイトルは入力必須です'
-      } else if (this.newBody === '') {
+      } else if (!this.newBody) {
         this.errorFlag = true
         this.errorMsg = 'コメントは入力必須です'
       } else {
