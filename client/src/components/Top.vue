@@ -1,7 +1,7 @@
 <template>
   <div class="todo-wrapper">
     <p>Todoリスト</p>
-    <TextareaComp></TextareaComp>
+    <NewTodo></NewTodo>
     <ul>
       <li v-for="item in todos" v-bind:key="item.id">タイトル:{{ item.title }} コメント:{{ item.body }}</li>
     </ul>
@@ -10,7 +10,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import TextareaComp from './parts/Textarea'
+import NewTodo from './parts/NewTodo'
 export default {
   name: "Top",
   computed: mapGetters([
@@ -25,7 +25,7 @@ export default {
     this.fetchTodos();
   },
   components: {
-    TextareaComp
+    NewTodo
   }
 };
 </script>
