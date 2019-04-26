@@ -19,8 +19,8 @@ describe('NewTodo.vue', () => {
   })
   it('actions test', () => {
     const wrapper = shallowMount(NewTodo, {store, localVue})
-    wrapper.find('input').setValue('testTitle')
-    wrapper.find('textarea').setValue('testBody')
+    wrapper.find('.new-title').setValue('testTitle')
+    wrapper.find('.new-body').setValue('testBody')
     const button = wrapper.find('button')
     button.trigger('click')
     expect(actions.postTodo).toHaveBeenCalledWith(
@@ -40,7 +40,7 @@ describe('NewTodo.vue', () => {
 
   it('error if body is not entered', () => {
     const wrapper = shallowMount(NewTodo, {store, localVue})
-    wrapper.find('input').setValue('testTitle')
+    wrapper.find('.new-title').setValue('testTitle')
     expect(wrapper.find('.error-msg').exists()).toBeFalsy()
     const button = wrapper.find('button')
     button.trigger('click')
@@ -49,7 +49,7 @@ describe('NewTodo.vue', () => {
 
   it('error if title is not entered', () => {
     const wrapper = shallowMount(NewTodo, {store, localVue})
-    wrapper.find('textarea').setValue('testBody')
+    wrapper.find('.new-body').setValue('testBody')
     expect(wrapper.find('.error-msg').exists()).toBeFalsy()
     const button = wrapper.find('button')
     button.trigger('click')
