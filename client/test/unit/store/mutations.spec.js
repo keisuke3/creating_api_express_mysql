@@ -14,7 +14,7 @@ describe('store mutations.js', () => {
     ];
     mutations.getTodos(state, todoData)
     expect(state.todos).toEqual([{ 'title': 'testTitle1', 'body': 'testBody1' }])
-  });
+  })
 
   it('The addTodo method', () => {
     const todoData = {
