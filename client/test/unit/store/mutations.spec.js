@@ -5,14 +5,14 @@ const state = {
 };
 
 describe('store mutations.js', () => {
-  it('The getTodos method', () => {
+  it('The setTodos method', () => {
     const todoData = [
       {
         'title': 'testTitle1',
         'body': 'testBody1'
       }
     ];
-    mutations.getTodos(state, todoData)
+    mutations.setTodos(state, todoData)
     expect(state.todos).toEqual([{ 'title': 'testTitle1', 'body': 'testBody1' }])
   })
 

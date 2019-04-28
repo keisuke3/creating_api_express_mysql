@@ -35,7 +35,7 @@ describe('store actions.js', () => {
       await actions.fetchTodos({ commit })
 
       expect(url).toBe('http://localhost:3000/api/todos')
-      expect(commit).toHaveBeenCalledWith('getTodos', 'value')
+      expect(commit).toHaveBeenCalledWith('setTodos', 'value')
     })
 
     it('catches an error', async () => {
