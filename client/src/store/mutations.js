@@ -1,5 +1,5 @@
 export default {
-  getTodos(state, todoData) {
+  setTodos(state, todoData) {
     state.todos = todoData
   },
   //Todoの新規作成

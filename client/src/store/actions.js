@@ -8,7 +8,7 @@ export default {
     try {
       const res = await axios.get(API_URL);
       const todoData = res.data;
-      commit('getTodos', todoData)
+      commit('setTodos', todoData)
     } catch (error) {
       throw Error('API Error occurred')
     }
