@@ -24,5 +24,14 @@ export default {
     } catch (error) {
       throw Error('API Error occurred')
     }
+  },
+  async deleteTodo({ commit }, id) {
+    try {
+      const res = await axios.delete(`${API_URL}/${id}`);
+      const deleteId = res.data
+      commit('deleteTodo', deleteId)
+    } catch (error) {
+      throw Error('API Error occurred')
+    }
   }
 }
