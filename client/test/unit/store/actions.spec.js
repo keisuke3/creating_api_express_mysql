@@ -23,6 +23,16 @@ jest.mock('axios', () => ({
       body = _body
       resolve(true)
     })
+  },
+  delete: (_url) => {
+    return new Promise((resolve) => {
+      if (mockError)
+        throw Error()
+
+      
+      url = _url
+      resolve({ data: 1 })
+    })
   }
 
 }))
@@ -61,6 +71,24 @@ describe('store actions.js', () => {
     it('catches an error', async () => {
       mockError = true
       await expect(actions.postTodo({ commit: jest.fn() }, {}))
+        .rejects.toThrow('API Error occurred')
+    })
+  })
+
+  describe('The deleteTodo method', () => {
+    it('success test', async () => {
+      mockError = false
+      const commit = jest.fn();
+      const id = 1;
+      await actions.deleteTodo({ commit }, id)
+
+      expect(url).toBe('http://localhost:3000/api/todos/1')
+      expect(commit).toHaveBeenCalledWith('deleteTodo', 1)
+    })
+    
+    it('catches an error', async () => {
+      mockError = true
+      await expect(actions.deleteTodo({ commit: jest.fn() }, {}))
         .rejects.toThrow('API Error occurred')
     })
   })

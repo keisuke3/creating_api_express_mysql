@@ -24,4 +24,12 @@ describe('store mutations.js', () => {
     mutations.addTodo(state, todoData)
     expect(state.todos[1]).toEqual({ 'title': 'testTitle2', 'body': 'testBody2' })
   })
+
+  it('The deleteTodo method', () => {
+    const deleteId = {
+      id: 2
+    }
+    mutations.deleteTodo(state, deleteId)
+    expect(state.todos).toEqual([{ 'title': 'testTitle1', 'body': 'testBody1' }])
+  })
 })
