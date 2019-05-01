@@ -12,19 +12,31 @@ describe('Top.vue', () => {
   let store
   beforeEach(() => {
     actions = {
-      fetchTodos: jest.fn()
+      fetchTodos: jest.fn(),
+      deleteTodo: jest.fn()
     }
     getters = {
-      todos: jest.fn()
+      todos: jest.fn().mockReturnValue([{
+        'id': 1,
+        'title': 'testTitle',
+        'body': 'testBody'
+      }])
     }
     store = new Vuex.Store({
       actions,
       getters
     })
   })
-  it('actions test', () => {
-    shallowMount(Top, {store, localVue})
+  it('test of getters and actions', () => {
+    const wrapper = shallowMount(Top, {store, localVue})
     expect(actions.fetchTodos).toHaveBeenCalled()
     expect(getters.todos).toHaveBeenCalled()
+    const button = wrapper.find('.delete-button')
+    button.trigger('click')
+    expect(actions.deleteTodo).toHaveBeenCalledWith(
+      expect.anything(),
+      1,
+      undefined
+    )
   })
 })
