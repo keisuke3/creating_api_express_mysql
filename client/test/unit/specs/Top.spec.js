@@ -17,7 +17,7 @@ describe('Top.vue', () => {
     }
     getters = {
       todos: jest.fn().mockReturnValue([{
-        id: 1,
+        'id': 1,
         'title': 'testTitle',
         'body': 'testBody'
       }])
@@ -31,7 +31,7 @@ describe('Top.vue', () => {
     const wrapper = shallowMount(Top, {store, localVue})
     expect(actions.fetchTodos).toHaveBeenCalled()
     expect(getters.todos).toHaveBeenCalled()
-    const button = wrapper.find('button')
+    const button = wrapper.find('.delete-button')
     button.trigger('click')
     expect(actions.deleteTodo).toHaveBeenCalledWith(
       expect.anything(),
