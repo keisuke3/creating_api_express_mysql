@@ -6,8 +6,8 @@ export default {
   addTodo(state, todoData) {
     state.todos.push(todoData)
   },
-  deleteTodo(state, deleteId) {
-    const deleteIndex = deleteId.id - 1;
+  deleteTodo(state, deleteData) {
+    const deleteIndex = state.todos.findIndex((todo) => todo.id === deleteData.id);
     state.todos.splice(deleteIndex, 1)
   }
 }
