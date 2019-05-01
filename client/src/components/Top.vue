@@ -5,7 +5,7 @@
     <ul>
       <li v-for="item in todos" v-bind:key="item.id">
         タイトル:{{ item.title }} コメント:{{ item.body }}
-        <button v-on:click="deleteTodoButton(item.id)" class="delete-button">削除</button>
+        <button v-on:click="deleteTodo(item.id)" class="delete-button">削除</button>
         </li>
     </ul>
   </div>
@@ -24,9 +24,6 @@ export default {
       "fetchTodos",
       "deleteTodo"
     ]),
-    deleteTodoButton(id) {
-      this.deleteTodo(id)
-    }
   },
   created() {
     this.fetchTodos();
