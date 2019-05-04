@@ -5,8 +5,8 @@
     <ul>
       <li v-for="item in todos" v-bind:key="item.id">
         タイトル:{{ item.title }} コメント:{{ item.body }}
-        <button v-on:click="showModal = true; editItems(item.id, item.title, item.body)" class="edit-button">編集</button>
-        <Modal v-if="showModal" v-bind:edit-todo="editTodo" v-on:close="showModal = false"></Modal>
+        <button v-on:click="onClickEditButton(item)" class="edit-button">編集</button>
+        <Modal v-if="showModal" v-bind:edit-todo="selectedTodo" v-on:close="onCloseModal()"></Modal>
         <button v-on:click="deleteTodo(item.id)" class="delete-button">削除</button>
         </li>
     </ul>
@@ -22,11 +22,7 @@ export default {
   data() {
     return {
       showModal: false,
-      editTodo: {
-        editId: '',
-        editTitle: '',
-        editBody: ''
-      }
+      selectedTodo: {}
     }
   },
   computed: mapGetters([
@@ -37,10 +33,12 @@ export default {
       "fetchTodos",
       "deleteTodo"
     ]),
-    editItems(id, title, body) {
-      this.editTodo.editId = id
-      this.editTodo.editTitle = title
-      this.editTodo.editBody = body
+    onClickEditButton(todo) {
+      this.showModal = true
+      this.selectedTodo = {...todo}
+    },
+    onCloseModal() {
+      this.showModal = false
     }
   },
   created() {
