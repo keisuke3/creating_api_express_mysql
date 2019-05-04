@@ -5,6 +5,8 @@
     <ul>
       <li v-for="item in todos" v-bind:key="item.id">
         タイトル:{{ item.title }} コメント:{{ item.body }}
+        <button v-on:click="showModal = true; editItems(item.id, item.title, item.body)" class="edit-button">編集</button>
+        <Modal v-if="showModal" v-bind:edit-todo="editTodo" v-on:close="showModal = false"></Modal>
         <button v-on:click="deleteTodo(item.id)" class="delete-button">削除</button>
         </li>
     </ul>
@@ -13,9 +15,20 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import Modal from './parts/Modal'
 import NewTodo from './parts/NewTodo'
 export default {
   name: "Top",
+  data() {
+    return {
+      showModal: false,
+      editTodo: {
+        editId: '',
+        editTitle: '',
+        editBody: ''
+      }
+    }
+  },
   computed: mapGetters([
     "todos"
   ]),
@@ -24,12 +37,18 @@ export default {
       "fetchTodos",
       "deleteTodo"
     ]),
+    editItems(id, title, body) {
+      this.editTodo.editId = id
+      this.editTodo.editTitle = title
+      this.editTodo.editBody = body
+    }
   },
   created() {
     this.fetchTodos();
   },
   components: {
-    NewTodo
+    NewTodo,
+    Modal
   }
 };
 </script>
