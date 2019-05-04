@@ -1,6 +1,6 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/todos'
+const API_URL = 'http://localhost:3000/api/todos';
 
 export default {
 
@@ -8,9 +8,9 @@ export default {
     try {
       const res = await axios.get(API_URL);
       const todoData = res.data;
-      commit('setTodos', todoData)
+      commit('setTodos', todoData);
     } catch (error) {
-      throw Error('API Error occurred')
+      throw Error('API Error occurred');
     }
   },
   async postTodo({ commit }, { newTitle, newBody }) {
@@ -20,30 +20,30 @@ export default {
         body: newBody
       });
       const todoData = res.data;
-      commit('addTodo', todoData)
+      commit('addTodo', todoData);
     } catch (error) {
-      throw Error('API Error occurred')
+      throw Error('API Error occurred');
     }
   },
   async deleteTodo({ commit }, id) {
     try {
       const res = await axios.delete(`${API_URL}/${id}`);
       const deleteData = res.data;
-      commit('deleteTodo', deleteData)
+      commit('deleteTodo', deleteData);
     } catch (error) {
-      throw Error('API Error occurred')
+      throw Error('API Error occurred');
     }
   },
   async updateTodo({ commit }, editTodo) {
     try {
-      const res = await axios.put(`${API_URL}/${editTodo.editId}`, {
-        title: editTodo.editTitle,
-        body: editTodo.editBody
+      const res = await axios.put(`${API_URL}/${editTodo.id}`, {
+        title: editTodo.title,
+        body: editTodo.body
       });
       const editData = res.data;
-      commit('updateTodo', editData)
+      commit('updateTodo', editData);
     } catch (error) {
-      throw Error('API Error occurred')
+      throw Error('API Error occurred');
     }
   }
 }
