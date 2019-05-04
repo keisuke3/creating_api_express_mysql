@@ -5,8 +5,8 @@
         <div class="modal-content">
           <h3>Modal</h3>
           <p v-if="errorFlag" class="error-msg">{{ errorMsg }}</p>
-          <input v-model="editTodo.editTitle" class="edit-title">
-          <textarea v-model="editTodo.editBody" class="edit-body" cols="30" rows="2"></textarea>
+          <input v-model="editTodo.title" class="edit-title">
+          <textarea v-model="editTodo.body" class="edit-body" cols="30" rows="2"></textarea>
           <button v-on:click="$emit('close')" class="cancel-button">キャンセル</button>
           <button v-on:click="editComplete()" class="finish-button">完了</button>
         </div>
@@ -30,18 +30,18 @@ export default {
     ...mapActions([
       'updateTodo'
     ]),
-    editComplete() {
-      if (!this.editTodo.editTitle && !this.editTodo.editBody) {
+    async editComplete() {
+      if (!this.editTodo.title && !this.editTodo.body) {
         this.errorFlag = true
         this.errorMsg = 'タイトル・コメントは入力必須です'
-      } else if (!this.editTodo.editTitle) {
+      } else if (!this.editTodo.title) {
         this.errorFlag = true
         this.errorMsg = 'タイトルは入力必須です'
-      } else if (!this.editTodo.editBody) {
+      } else if (!this.editTodo.body) {
         this.errorFlag = true
         this.errorMsg = 'コメントは入力必須です'
       } else {
-        this.updateTodo(this.editTodo)
+        await this.updateTodo(this.editTodo)
         this.$emit('close')
         this.errorFlag = false
       }
