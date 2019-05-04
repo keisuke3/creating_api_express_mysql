@@ -28,8 +28,20 @@ export default {
   async deleteTodo({ commit }, id) {
     try {
       const res = await axios.delete(`${API_URL}/${id}`);
-      const deleteData = res.data
+      const deleteData = res.data;
       commit('deleteTodo', deleteData)
+    } catch (error) {
+      throw Error('API Error occurred')
+    }
+  },
+  async updateTodo({ commit }, editTodo) {
+    try {
+      const res = await axios.put(`${API_URL}/${editTodo.editId}`, {
+        title: editTodo.editTitle,
+        body: editTodo.editBody
+      });
+      const editData = res.data;
+      commit('updateTodo', editData)
     } catch (error) {
       throw Error('API Error occurred')
     }
