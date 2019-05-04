@@ -44,6 +44,6 @@ describe('Top.vue', () => {
     const wrapper = shallowMount(Top, {store, localVue})
     const button = wrapper.find('.edit-button')
     button.trigger('click')
-    expect(wrapper.vm.editTodo).toEqual({ editId: 1, editTitle: 'testTitle', editBody: 'testBody'})
+    expect(wrapper.vm.selectedTodo).toEqual({ id: 1, title: 'testTitle', body: 'testBody'})
   })
 })
