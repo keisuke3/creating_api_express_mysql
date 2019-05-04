@@ -29,9 +29,19 @@ jest.mock('axios', () => ({
       if (mockError)
         throw Error()
 
-      
+
       url = _url
       resolve({ data: 1 })
+    })
+  },
+  put: (_url, _body) => {
+    return new Promise((resolve) => {
+      if (mockError)
+        throw Error()
+
+      url = _url
+      body = _body
+      resolve(true)
     })
   }
 
@@ -64,7 +74,7 @@ describe('store actions.js', () => {
       await actions.postTodo({ commit }, { newTitle, newBody })
 
       expect(url).toBe('http://localhost:3000/api/todos')
-      expect(body).toEqual({ 'title': 'testTitle', 'body': 'testBody' })
+      expect(body).toEqual({ title: 'testTitle', body: 'testBody' })
       expect(commit).toHaveBeenCalledWith('addTodo', undefined)
     })
 
@@ -85,10 +95,32 @@ describe('store actions.js', () => {
       expect(url).toBe('http://localhost:3000/api/todos/1')
       expect(commit).toHaveBeenCalledWith('deleteTodo', 1)
     })
-    
+
     it('catches an error', async () => {
       mockError = true
       await expect(actions.deleteTodo({ commit: jest.fn() }, {}))
+        .rejects.toThrow('API Error occurred')
+    })
+  })
+
+  describe('The updateTodo method', () => {
+    it('success test', async () => {
+      mockError = false
+      const commit = jest.fn();
+      const editTodo = {
+        editId: 1,
+        editTitle: 'testTitle',
+        editBody: 'testBody'
+      };
+      await actions.updateTodo({ commit }, editTodo)
+      expect(url).toBe('http://localhost:3000/api/todos/1')
+      expect(body).toEqual({ title: 'testTitle', body: 'testBody' })
+      expect(commit).toHaveBeenCalledWith('updateTodo', undefined)
+    })
+
+    it('catches an error', async () => {
+      mockError = true
+      await expect(actions.updateTodo({ commit: jest.fn() }, {}))
         .rejects.toThrow('API Error occurred')
     })
   })
