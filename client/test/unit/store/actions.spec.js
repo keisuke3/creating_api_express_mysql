@@ -108,9 +108,9 @@ describe('store actions.js', () => {
       mockError = false
       const commit = jest.fn();
       const editTodo = {
-        editId: 1,
-        editTitle: 'testTitle',
-        editBody: 'testBody'
+        id: 1,
+        title: 'testTitle',
+        body: 'testBody'
       };
       await actions.updateTodo({ commit }, editTodo)
       expect(url).toBe('http://localhost:3000/api/todos/1')
