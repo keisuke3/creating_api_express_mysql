@@ -10,9 +10,9 @@ describe('Modal.vue', () => {
   let actions
   let store
   const editTodo = {
-    editId: 1,
-    editTitle: 'testTitle',
-    editBody: 'testBody'
+    id: 1,
+    title: 'testTitle',
+    body: 'testBody'
   };
   beforeEach(() => {
     actions = {
@@ -24,7 +24,7 @@ describe('Modal.vue', () => {
   })
 
   describe('The editComplete method', () => {
-    it('success test', () => {
+    it('success test', async () => {
       const wrapper = shallowMount(Modal, {
         store,
         localVue,
@@ -33,10 +33,10 @@ describe('Modal.vue', () => {
         }
       })
       const button = wrapper.find('.finish-button')
-      button.trigger('click')
-      expect(actions.updateTodo).toHaveBeenCalledWith(
+      await button.trigger('click')
+      await expect(actions.updateTodo).toHaveBeenCalledWith(
         expect.anything(),
-        { editId: 1, editTitle: 'testTitle', editBody: 'testBody' },
+        { id: 1, title: 'testTitle', body: 'testBody' },
         undefined
       )
       expect(wrapper.emitted().close).toBeTruthy()
