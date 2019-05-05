@@ -39,4 +39,11 @@ describe('Top.vue', () => {
       undefined
     )
   })
+  
+  it('The editItems method', () => {
+    const wrapper = shallowMount(Top, {store, localVue})
+    const button = wrapper.find('.edit-button')
+    button.trigger('click')
+    expect(wrapper.vm.selectedTodo).toEqual({ id: 1, title: 'testTitle', body: 'testBody'})
+  })
 })
