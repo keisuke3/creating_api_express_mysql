@@ -15,7 +15,7 @@ export default {
     state.todos[updateIndex].title = editData.title
     state.todos[updateIndex].body = editData.body
   },
-  completedChange(state, index) {
+  switchCompleted(state, index) {
     state.todos[index].completed = !state.todos[index].completed
   }
 }
