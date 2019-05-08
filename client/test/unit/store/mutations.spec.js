@@ -50,7 +50,7 @@ describe('store mutations.js', () => {
 
   it('The completedChange method', () => {
     const index = 0;
-    mutations.completedChange(state, index);
-    expect(state.todos[0].completed).toBe(true);
+    mutations.switchCompleted(state, index);
+    expect(state.todos[index].completed).toBe(true);
   });
 });
