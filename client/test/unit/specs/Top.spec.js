@@ -17,7 +17,7 @@ describe('Top.vue', () => {
       deleteTodo: jest.fn()
     }
     mutations = {
-      completedChange: jest.fn()
+      switchCompleted: jest.fn()
     }
     getters = {
       todos: jest.fn().mockReturnValue([{
@@ -53,11 +53,11 @@ describe('Top.vue', () => {
   })
 
   describe('The commit test', () => {
-    it('The completedChange', () => {
+    it('The switchCompleted', () => {
       const wrapper = shallowMount(Top, { store, localVue })
       const button = wrapper.find('.accordion-button')
       button.trigger('click')
-      expect(mutations.completedChange).toHaveBeenCalledWith(
+      expect(mutations.switchCompleted).toHaveBeenCalledWith(
         expect.anything(),
         0
       )
