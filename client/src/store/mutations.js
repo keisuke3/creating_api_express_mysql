@@ -14,5 +14,8 @@ export default {
     const updateIndex = state.todos.findIndex((todo) => todo.id === editData.id);
     state.todos[updateIndex].title = editData.title
     state.todos[updateIndex].body = editData.body
+  },
+  completedChange(state, index) {
+    state.todos[index].completed = !state.todos[index].completed
   }
 }
