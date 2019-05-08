@@ -7,7 +7,7 @@
        <li v-for="(item, index) in todos" v-bind:key="item.id">
           <div class="todo-task-wrapper">
             <div class="todo-task-title">{{ item.title }}</div>
-            <button v-on:click="accordionToggle(index)" v-bind:class="{ 'state-open': item.completed }" class="accordion-button">▼</button>
+            <button v-on:click="toggleCompleted(index)" v-bind:class="{ 'state-open': item.completed }" class="accordion-button">▼</button>
             <button v-on:click="onClickEditButton(item)" class="edit-button">編集</button>
             <transition name="modal">
               <Modal v-if="showModal" v-bind:edit-todo="selectedTodo" v-on:close="onCloseModal()"></Modal>
@@ -47,7 +47,7 @@ export default {
       "deleteTodo"
     ]),
     ...mapMutations([
-      "completedChange"
+      "switchCompleted"
     ]),
     onClickEditButton(todo) {
       this.showModal = true
@@ -56,8 +56,8 @@ export default {
     onCloseModal() {
       this.showModal = false
     },
-    accordionToggle(index) {
-      this.completedChange(index)
+    toggleCompleted(index) {
+      this.switchCompleted(index)
     }
   },
   created() {
