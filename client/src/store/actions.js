@@ -17,7 +17,8 @@ export default {
     try {
       const res = await axios.post(API_URL, {
         title: newTitle,
-        body: newBody
+        body: newBody,
+        completed: false
       });
       const todoData = res.data;
       commit('addTodo', todoData);

@@ -74,7 +74,7 @@ describe('store actions.js', () => {
       await actions.postTodo({ commit }, { newTitle, newBody })
 
       expect(url).toBe('http://localhost:3000/api/todos')
-      expect(body).toEqual({ title: 'testTitle', body: 'testBody' })
+      expect(body).toEqual({ title: 'testTitle', body: 'testBody', completed: false })
       expect(commit).toHaveBeenCalledWith('addTodo', undefined)
     })
 
