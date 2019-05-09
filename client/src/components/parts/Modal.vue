@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
 export default {
   name: 'Modal',
   props: ['editTodo'],
@@ -28,7 +28,7 @@ export default {
     return {
       errorFlag: false,
       errorMsg: ''
-    }
+    };
   },
   methods: {
     ...mapActions([
@@ -37,26 +37,26 @@ export default {
     async editComplete() {
       try {
         if (!this.editTodo.title && !this.editTodo.body) {
-          this.errorFlag = true
-          this.errorMsg = 'タイトル・コメントは入力必須です'
+          this.errorFlag = true;
+          this.errorMsg = 'タイトル・コメントは入力必須です';
         } else if (!this.editTodo.title) {
-          this.errorFlag = true
-          this.errorMsg = 'タイトルは入力必須です'
+          this.errorFlag = true;
+          this.errorMsg = 'タイトルは入力必須です';
         } else if (!this.editTodo.body) {
-          this.errorFlag = true
-          this.errorMsg = 'コメントは入力必須です'
+          this.errorFlag = true;
+          this.errorMsg = 'コメントは入力必須です';
         } else {
-          await this.updateTodo(this.editTodo)
-          this.$emit('close')
-          this.errorFlag = false
+          await this.updateTodo(this.editTodo);
+          this.$emit('close');
+          this.errorFlag = false;
         }
       } catch (error) {
-        this.errorFlag = true
-        this.errorMsg = '通信エラーが発生しました'
+        this.errorFlag = true;
+        this.errorMsg = '通信エラーが発生しました';
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
