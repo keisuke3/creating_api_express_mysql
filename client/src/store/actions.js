@@ -47,4 +47,4 @@ export default {
       throw Error('API Error occurred');
     }
   }
-}
+};

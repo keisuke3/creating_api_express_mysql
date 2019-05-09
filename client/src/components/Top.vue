@@ -1,6 +1,8 @@
 <template>
   <div class="todo-wrapper">
-    <h2>Todoリスト</h2>
+    <header class="todo-header">
+      <h2>タスク管理アプリ</h2>
+    </header>
     <NewTodo></NewTodo>
     <ul>
       <div class="todo-task">
@@ -28,15 +30,15 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import Modal from './parts/Modal'
-import NewTodo from './parts/NewTodo'
+import Modal from './parts/Modal';
+import NewTodo from './parts/NewTodo';
 export default {
   name: "Top",
   data() {
     return {
       showModal: false,
       selectedTodo: {}
-    }
+    };
   },
   computed: mapGetters([
     "todos"
@@ -50,14 +52,14 @@ export default {
       "switchCompleted"
     ]),
     onClickEditButton(todo) {
-      this.showModal = true
-      this.selectedTodo = {...todo}
+      this.showModal = true;
+      this.selectedTodo = {...todo};
     },
     onCloseModal() {
-      this.showModal = false
+      this.showModal = false;
     },
     toggleCompleted(index) {
-      this.switchCompleted(index)
+      this.switchCompleted(index);
     }
   },
   created() {
@@ -73,13 +75,22 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .todo-wrapper {
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    text-align: center;
+
+  .todo-header {
+    background-color: #5588a3;
+    position: relative;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    padding: 20px 0;
+    margin-bottom: 50px;
+
+    h2 {
+      font-size: 2rem;
+      color: #ffffff;
+      margin-left: 20px;
+      font-weight: bold;
+    }
   }
   .todo-task {
-    margin-top: 50px;
     width: 400px;
     margin-left: 20px;
 

@@ -1,14 +1,14 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils'
-import Vuex from 'vuex'
-import Modal from '../../../src/components/parts/Modal'
+import { shallowMount, createLocalVue } from '@vue/test-utils';
+import Vuex from 'vuex';
+import Modal from '../../../src/components/parts/Modal';
 
-const localVue = createLocalVue()
+const localVue = createLocalVue();
 
-localVue.use(Vuex)
+localVue.use(Vuex);
 
 describe('Modal.vue', () => {
-  let actions
-  let store
+  let actions;
+  let store;
   const editTodo = {
     id: 1,
     title: 'testTitle',
@@ -17,11 +17,11 @@ describe('Modal.vue', () => {
   beforeEach(() => {
     actions = {
       updateTodo: jest.fn()
-    }
+    };
     store = new Vuex.Store({
       actions
-    })
-  })
+    });
+  });
 
   describe('The editComplete method', () => {
     it('success test', async () => {
@@ -31,16 +31,16 @@ describe('Modal.vue', () => {
         propsData: {
           editTodo
         }
-      })
-      const button = wrapper.find('.finish-button')
-      await button.trigger('click')
+      });
+      const button = wrapper.find('.finish-button');
+      await button.trigger('click');
       await expect(actions.updateTodo).toHaveBeenCalledWith(
         expect.anything(),
         { id: 1, title: 'testTitle', body: 'testBody' },
         undefined
-      )
-      expect(wrapper.emitted().close).toBeTruthy()
-    })
+      );
+      expect(wrapper.emitted().close).toBeTruthy();
+    });
 
     it('error if title and body are not input, cancel button test', () => {
       const wrapper = shallowMount(Modal, {
@@ -49,17 +49,17 @@ describe('Modal.vue', () => {
         propsData: {
           editTodo
         }
-      })
-      expect(wrapper.find('.error-msg').exists()).toBeFalsy()
-      wrapper.find('.edit-title').setValue('')
-      wrapper.find('.edit-body').setValue('')
-      const button = wrapper.find('.finish-button')
-      button.trigger('click')
-      expect(wrapper.find('.error-msg').text()).toEqual('タイトル・コメントは入力必須です')
-      const cancelButton = wrapper.find('.cancel-button')
-      cancelButton.trigger('click')
-      expect(wrapper.emitted().close).toBeTruthy()
-    })
+      });
+      expect(wrapper.find('.error-msg').exists()).toBeFalsy();
+      wrapper.find('.edit-title').setValue('');
+      wrapper.find('.edit-body').setValue('');
+      const button = wrapper.find('.finish-button');
+      button.trigger('click');
+      expect(wrapper.find('.error-msg').text()).toEqual('タイトル・コメントは入力必須です');
+      const cancelButton = wrapper.find('.cancel-button');
+      cancelButton.trigger('click');
+      expect(wrapper.emitted().close).toBeTruthy();
+    });
 
     it('error if title is not entered', () => {
       const wrapper = shallowMount(Modal, {
@@ -68,13 +68,13 @@ describe('Modal.vue', () => {
         propsData: {
           editTodo
         }
-      })
-      expect(wrapper.find('.error-msg').exists()).toBeFalsy()
-      wrapper.find('.edit-body').setValue('testBody')
-      const button = wrapper.find('.finish-button')
-      button.trigger('click')
-      expect(wrapper.find('.error-msg').text()).toEqual('タイトルは入力必須です')
-    })
+      });
+      expect(wrapper.find('.error-msg').exists()).toBeFalsy();
+      wrapper.find('.edit-body').setValue('testBody');
+      const button = wrapper.find('.finish-button');
+      button.trigger('click');
+      expect(wrapper.find('.error-msg').text()).toEqual('タイトルは入力必須です');
+    });
 
     it('error if body is not entered', () => {
       const wrapper = shallowMount(Modal, {
@@ -83,13 +83,13 @@ describe('Modal.vue', () => {
         propsData: {
           editTodo
         }
-      })
-      expect(wrapper.find('.error-msg').exists()).toBeFalsy()
-      wrapper.find('.edit-title').setValue('testTitle')
-      wrapper.find('.edit-body').setValue('')
-      const button = wrapper.find('.finish-button')
-      button.trigger('click')
-      expect(wrapper.find('.error-msg').text()).toEqual('コメントは入力必須です')
-    })
-  })
-})
+      });
+      expect(wrapper.find('.error-msg').exists()).toBeFalsy();
+      wrapper.find('.edit-title').setValue('testTitle');
+      wrapper.find('.edit-body').setValue('');
+      const button = wrapper.find('.finish-button');
+      button.trigger('click');
+      expect(wrapper.find('.error-msg').text()).toEqual('コメントは入力必須です');
+    });
+  });
+});

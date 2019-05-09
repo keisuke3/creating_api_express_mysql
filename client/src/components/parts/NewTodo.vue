@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
 export default {
   name: 'NewTodo',
   data() {
@@ -21,7 +21,7 @@ export default {
       newBody: '',
       errorFlag: false,
       errorMsg: ''
-    }
+    };
   },
   methods: {
     ...mapActions([
@@ -29,28 +29,28 @@ export default {
     ]),
     postTodoButton() {
       if (!this.newTitle && !this.newBody) {
-        this.errorFlag = true
-        this.errorMsg = 'タイトル・コメントは入力必須です'
+        this.errorFlag = true;
+        this.errorMsg = 'タイトル・コメントは入力必須です';
       } else if (!this.newTitle) {
-        this.errorFlag = true
-        this.errorMsg = 'タイトルは入力必須です'
+        this.errorFlag = true;
+        this.errorMsg = 'タイトルは入力必須です';
       } else if (!this.newBody) {
-        this.errorFlag = true
-        this.errorMsg = 'コメントは入力必須です'
+        this.errorFlag = true;
+        this.errorMsg = 'コメントは入力必須です';
       } else {
-        this.postTodo({newTitle: this.newTitle, newBody: this.newBody})
-        this.newTitle = ''
-        this.newBody = ''
-        this.errorFlag = false
+        this.postTodo({newTitle: this.newTitle, newBody: this.newBody});
+        this.newTitle = '';
+        this.newBody = '';
+        this.errorFlag = false;
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
 .new-todo {
-  margin: 0 auto;
+  margin: 0 auto 50px;
   height: 80px;
   width: 600px;
 

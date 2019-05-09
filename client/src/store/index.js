@@ -1,13 +1,11 @@
-import 'babel-polyfill'
-import Vue from 'vue'
-import Vuex from 'vuex'
-import getters from './getters'
-import mutations from './mutations'
-import actions from './actions'
+import 'babel-polyfill';
+import Vue from 'vue';
+import Vuex from 'vuex';
+import getters from './getters';
+import mutations from './mutations';
+import actions from './actions';
 
-Vue.use(Vuex)
-
-const API_URL = 'http://localhost:3000/api/todos'
+Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
@@ -17,6 +15,6 @@ const store = new Vuex.Store({
   mutations,
   actions
 
-})
+});
 
-export default store
+export default store;
